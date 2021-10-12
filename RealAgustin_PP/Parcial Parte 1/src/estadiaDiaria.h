@@ -13,27 +13,28 @@
 #define ESTADIADIARIA_H_
 
 #include "inputs.h"
-
+#include "perritos.h"
+#include "fecha.h"
 typedef struct
 {
 	int id;
 	char nombresDuenio[51];
-	int telefonoContacto[10];
+	int telefonoContacto;
 	int idPerro;
-	int fecha;
+	sFecha fecha;
+	int estadoEstadiaVacio;
 
-}dEstadiaDiaria;
+}sEstadiaDiaria;
 
-int EstadiaDiaria_initLista(dEstadiaDiaria list[], int len);
-//int EstadiaDiaria_addEstadiaDiaria(dEstadiaDiaria list[], int len, int id, char nombreduenio[],int telefonoContacto, int idPerro, eFecha fecha);
-int EstadiaDiaria_buscarEspacioLibre(dEstadiaDiaria list[], int tam);
-int EstadiaDiaria_findById(dEstadiaDiaria list[], int len,int id);
-int EstadiaDiaria_removePerro(dEstadiaDiaria list[], int len, int id);
-int EstadiaDiaria_printLista(dEstadiaDiaria list[], int length);
-void EstadiaDiaria_printEncabezado();
-void EstadiaDiaria_printOne(dEstadiaDiaria estadia);
-int EstadiaDiaria_PedirIdPerro(dPerritos list[], int length, int *idPerro,int cantidadIntentosPermitidos);
-
+int EstadiaDiaria_iniciarLista(sEstadiaDiaria lista[], int len);
+int EstadiaDiaria_agregarEstadiaDiaria(sEstadiaDiaria lista[], int len, int id, char nombresDuenio[],int telefonoContacto, int idPerro, sFecha fecha);
+int EstadiaDiaria_buscarEspacioLibre(sEstadiaDiaria lista[], int len);
+int EstadiaDiaria_buscarPorId(sEstadiaDiaria lista[], int len,int id);
+int EstadiaDiaria_eliminarPerroEstadia(sEstadiaDiaria lista[], int len, int id);
+int ConfirmarSioNoEstadiaDiaria(char* mensaje);
+void EstadiaDiaria_mostrarUnaEstadia(sEstadiaDiaria estadia);
+int EstadiaDiaria_orderEstadiaPerrito(sEstadiaDiaria lista[], int len);
+int EstadiaDiaria_imprimirListaEstadiaDiaria(sEstadiaDiaria lista[], int length);
 
 
 #endif /* ESTADIADIARIA_H_ */

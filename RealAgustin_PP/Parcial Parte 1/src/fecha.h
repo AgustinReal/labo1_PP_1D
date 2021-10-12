@@ -17,10 +17,11 @@ typedef struct
 	int mes;
 	int anio;
 
-}dFecha;
+}sFecha;
 
-int Fecha_pedirVerificarFecha(dFecha* fecha);
-int Fecha_modificarFecha(dFecha* fecha);
-void Fecha_imprimirFecha(dFecha fecha);
+int Fecha_pedirVerificarFecha(sFecha* fecha);
+int Fecha_modificarFecha(sFecha* fecha);
+void Fecha_imprimirFecha(sFecha fecha);
+int Fecha_AcpyB(sFecha fechaA,sFecha fechaB);
 
 #endif /* FECHA_H_ */

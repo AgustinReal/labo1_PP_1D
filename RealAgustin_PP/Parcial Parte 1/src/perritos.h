@@ -26,17 +26,17 @@ typedef struct
 	int edad;
 	int estadoVacio;
 
-}dPerritos;
+}sPerritos;
 
-int Perritos_iniciarLista(dPerritos lista[], int len);
-int Perritos_agregarPerrito(dPerritos lista[], int len, int id, char nombre[],char raza[],int edad);
-int Perritos_buscarEspacioLibrePerrito(dPerritos lista[], int tam);
-int Perritos_buscarPorIdPerrito(dPerritos lista[], int len,int id);
-int Perritos_eliminarPerrito(dPerritos lista[], int len, int id);
-void Perritos_mostrarUnPerrito(dPerritos perro);
+int Perritos_iniciarLista(sPerritos lista[], int len);
+int Perritos_agregarPerrito(sPerritos lista[], int len, int id, char nombre[],char raza[],int edad);
+int Perritos_buscarEspacioLibrePerrito(sPerritos lista[], int tam);
+int Perritos_buscarPorIdPerrito(sPerritos lista[], int len,int id);
+int Perritos_eliminarPerrito(sPerritos lista[], int len, int id);
+void Perritos_mostrarUnPerrito(sPerritos perro);
 int ConfirmarSioNoPerrito(char* mensaje);
-int Perritos_contarPerritosActivos(dPerritos lista[],int len, int* contadorperritos);
-float Perritos_SumaEdadesGeneral(dPerritos lista[],int len, float* acumuladorEdadesPerritosAux);
-float Perritos_PromedioEdades(dPerritos lista[],int len , float* promedio, float* acumuladorEdadesPerritosAux, int* contadorperritos);
-int Perritos_imprimirPerritos(dPerritos lista[], int length);
+int Perritos_contarPerritosActivos(sPerritos lista[],int len, int* auxContadorPerritos);
+float Perritos_SumaEdadesGeneral(sPerritos lista[],int len, float* acumuladorEdadesPerritosAux);
+float Perritos_PromedioEdades(sPerritos lista[],int len , float* promedio, float* acumuladorEdadesPerritosAux, int* auxContadorPerritos);
+int Perritos_imprimirPerritos(sPerritos lista[], int length);
 #endif /* PERRITOS_H_ */

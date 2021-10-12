@@ -10,7 +10,7 @@
 #include "fecha.h"
 #include "inputs.h"
 
-int Fecha_pedirVerificarFecha(dFecha* fecha)
+int Fecha_pedirVerificarFecha(sFecha* fecha)
 {
 	int retorno=-1;
 	int huboError=0;
@@ -21,9 +21,9 @@ int Fecha_pedirVerificarFecha(dFecha* fecha)
 	if(fecha!=NULL)
 	{
 
-		pedirEntero(diaAux, "Ingrese el dia para la estadia del perrito: ", "Error. Ingrese el dia para la estadia del perrito: ", 1, 31);
-		pedirEntero(mesAux, "Ingrese el mes para la estadia del perrito: ", "Error. Ingrese el mes para la estadia del perrito: ", 1, 12);
-		pedirEntero(anioAux, "Ingrese el anio para la estadia del perrito: ", "Error. Ingrese el anio para la estadia del perrito: ", 2021, 2100);
+		pedirEntero(&diaAux, "Ingrese el dia para la estadia del perrito: ", "Error. Ingrese el dia para la estadia del perrito: ", 1, 31);
+		pedirEntero(&mesAux, "Ingrese el mes para la estadia del perrito: ", "Error. Ingrese el mes para la estadia del perrito: ", 1, 12);
+		pedirEntero(&anioAux, "Ingrese el anio para la estadia del perrito: ", "Error. Ingrese el anio para la estadia del perrito: ", 2021, 2100);
 
 		if(mesAux>1 && mesAux<12)
 		{
@@ -61,7 +61,7 @@ int Fecha_pedirVerificarFecha(dFecha* fecha)
 					}
 			    break;
 				case 2:
-					if(anioAux%4==0 && anioAux%100!=0 || anioAux%400==0)
+					if((anioAux%4==0 && anioAux%100!=0) || anioAux%400==0)
 					{
 						if (diaAux>=1 && diaAux<=29)
 						{
@@ -99,10 +99,36 @@ int Fecha_pedirVerificarFecha(dFecha* fecha)
 	if(huboError==0)
 	{
 		retorno=1;
+		fecha->dia=diaAux;
+		fecha->mes=mesAux;
+		fecha->anio=anioAux;
 	}
+
 	return retorno;
 }
-int Fecha_modificarFecha(dFecha* fecha)
+int Fecha_AcpyB(sFecha fechaA,sFecha fechaB)
+{
+	int retorno;
+
+
+	if(fechaA.dia>fechaB.dia && fechaA.mes==fechaB.mes && fechaA.anio==fechaB.anio)
+	{
+		retorno=1;
+	}
+	else if(fechaA.mes>fechaB.mes && fechaA.anio==fechaB.anio)
+	{
+		retorno=-1;
+	}
+	else if(fechaA.anio>fechaB.anio)
+	{
+		retorno=0;
+	}
+
+
+	return retorno;
+
+}
+int Fecha_modificarFecha(sFecha* fecha)
 {
 	int retorno=-1;
 
@@ -114,7 +140,7 @@ int Fecha_modificarFecha(dFecha* fecha)
 	}
 	return retorno;
 }
-void Fecha_imprimirFecha(dFecha fecha)
+void Fecha_imprimirFecha(sFecha fecha)
 {
 	printf("%-3d %-3d %-5d", fecha.dia, fecha.mes, fecha.anio);
 }
