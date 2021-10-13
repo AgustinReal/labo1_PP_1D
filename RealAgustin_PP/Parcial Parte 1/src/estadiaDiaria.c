@@ -68,12 +68,11 @@ int EstadiaDiaria_eliminarPerroEstadia(sEstadiaDiaria lista[], int len, int id)
 
 	if(lista!=NULL)
 	{
-		pedirEntero(&idIngresado,"Ingrese el ID del perrito de la estadia a borrar de (0-1000): ", "Reingrese el ID del perrito a borrar de la estadia de (0-1000): ", 0, 1000);
+		pedirEntero(&idIngresado,"Ingrese el ID del cliente de la estadia a borrar de (100000-1000000): ", "Reingrese el ID del cliente de la estadia a borrar de (100000-1000000): ", 100000, 1000000);
 		index=EstadiaDiaria_buscarPorId(lista, len, idIngresado);
 
 		if(index!=-1)
 		{
-			printf("\nEl Perrito de la estadia a eliminar:\n\n %-5d %-20s %-20d %-20d %d-%d-%d %-20d\n\n", "Id", "NombreDueño", "telefonoContacto", "idPerro", "dia-mes-anio", "estado");
 			EstadiaDiaria_mostrarUnaEstadia(lista[index]);
 
 			if(!ConfirmarSioNoEstadiaDiaria("\nIngrese 's' para confirmar la eliminacion del perrito de la estadia."))
@@ -103,13 +102,13 @@ int EstadiaDiaria_orderEstadiaPerrito(sEstadiaDiaria lista[], int len)
 		if(lista!=NULL)
 		{
 
-		   printf("Ingrese la manera que quiere ordenar los nombres, 1 para ascendente o 2 para de descendente: ");
+		   printf("Ingrese la manera que quiere ordenar los nombres, 1 para ascendente: ");
 		   fflush(stdin);
 		   scanf("%d", &order);
 
-		   while(order>3)
+		   while(order>2)
 		   {
-			   printf("Ingrese la manera que quiere ordenar los nombres, 1 para ascendente o 2 para de descendente: ");
+			   printf("Ingrese la manera que quiere ordenar los nombres, 1 para ascendente: ");
 			   fflush(stdin);
 			   scanf("%d", &order);
 		   }
@@ -117,37 +116,17 @@ int EstadiaDiaria_orderEstadiaPerrito(sEstadiaDiaria lista[], int len)
 		   switch(order)
 		   {
 			 case 1:
-				for(int i=0;i<len;i++)
-				{
-				  for(int j=i+1;j<len;j++)
-				  {
-					  if(lista[i].estadoEstadiaVacio==1 && lista[j].estadoEstadiaVacio==1 && strcmp(lista[i].nombresDuenio, lista[j].nombresDuenio)==1)
-					  {
-						  auxLista=lista[i];
-						  lista[i]=lista[j];
-						  lista[j]=auxLista;
-					  }
-					  else if(strcmp(lista[i].nombresDuenio, lista[j].nombresDuenio)==0 && Fecha_AcpyB(lista[i].fecha, lista[j].fecha))
-					  {
-						  auxLista=lista[i];
-						  lista[i]=lista[j];
-					      lista[j]=auxLista;
-					  }
-				  }
-				}
-			 break;
-			 case 2:
 				 for(int i=0;i<len;i++)
 				 {
 				   for(int j=i+1;j<len;j++)
 				   {
-					   if(lista[i].estadoEstadiaVacio==1 && lista[j].estadoEstadiaVacio==1 && strcmp(lista[i].nombresDuenio, lista[j].nombresDuenio)==-1)
+					   if(lista[i].estadoEstadiaVacio==1 && strcmp(lista[i].nombresDuenio, lista[j].nombresDuenio)==-1 &&lista[j].estadoEstadiaVacio==1 && Fecha_AcpyB(lista[i].fecha, lista[j].fecha)==-1)
 					   {
 						  auxLista=lista[i];
 						  lista[i]=lista[j];
 						  lista[j]=auxLista;
 					   }
-					   else if(strcmp(lista[i].nombresDuenio, lista[j].nombresDuenio)==0 && Fecha_AcpyB(lista[i].fecha, lista[j].fecha))
+					   else if(lista[i].estadoEstadiaVacio==1 && lista[j].estadoEstadiaVacio==1 && Fecha_AcpyB(lista[i].fecha, lista[j].fecha)==0 && strcmp(lista[i].nombresDuenio, lista[j].nombresDuenio)==0)
 					  {
 						  auxLista=lista[i];
 						  lista[i]=lista[j];
@@ -166,7 +145,7 @@ int EstadiaDiaria_orderEstadiaPerrito(sEstadiaDiaria lista[], int len)
 }
 void EstadiaDiaria_mostrarUnaEstadia(sEstadiaDiaria estadia)
 {
-	printf("%-5d %-20s %-20d %-20d %d-%d-%d %-20d\n", estadia.id, estadia.nombresDuenio, estadia.telefonoContacto, estadia.idPerro, estadia.fecha.dia, estadia.fecha.mes, estadia.fecha.anio, estadia.estadoEstadiaVacio);
+	printf("%-5d %-20s %-20d %-20d %d-%d-%d \n", estadia.id, estadia.nombresDuenio, estadia.telefonoContacto, estadia.idPerro, estadia.fecha.dia, estadia.fecha.mes, estadia.fecha.anio);
 }
 int EstadiaDiaria_imprimirListaEstadiaDiaria(sEstadiaDiaria lista[], int length)
 {
@@ -174,7 +153,6 @@ int EstadiaDiaria_imprimirListaEstadiaDiaria(sEstadiaDiaria lista[], int length)
 
 	if(lista!=NULL)
 	{
-		printf("\nEl Perrito de la estadia a eliminar:\n\n %-5d %-20s %-20d %-20d %d-%d-%d %-20d\n\n", "Id", "NombreDueño", "telefonoContacto", "idPerro", "dia-mes-anio", "estado");
 
 		for(int i=0;i<length;i++)
 		{
@@ -214,7 +192,7 @@ int EstadiaDiaria_buscarPorId(sEstadiaDiaria lista[], int len,int id)
 			{
 				if(lista[i].estadoEstadiaVacio==0 && lista[i].id==id)
 				{
-					index=1;
+					index=i;
 					break;
 				}
 			}

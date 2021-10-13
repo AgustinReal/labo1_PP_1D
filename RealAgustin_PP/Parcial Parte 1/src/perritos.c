@@ -69,7 +69,7 @@ int Perritos_eliminarPerrito(sPerritos lista[], int len, int id)
 
 		if(index!=-1)
 		{
-			printf("\nEl Perrito a eliminar:\n\n %-5d %-20s %-20s %-20d %-20d\n", "Id", "Nombre", "raza", "edad", "estado");
+			printf("\nEl Perrito a eliminar:\n\n %-10d %-20s %-20s %-20d %-20d\n", "Id", "Nombre", "raza", "edad", "estado");
 			Perritos_mostrarUnPerrito(lista[index]);
 
 			if(!ConfirmarSioNoPerrito("\nIngrese 's' para confirmar la eliminacion del perrito."))
@@ -139,7 +139,7 @@ float Perritos_PromedioEdades(sPerritos lista[],int len , float* promedio, float
 }
 void Perritos_mostrarUnPerrito(sPerritos perro)
 {
-	printf("%-5d %-20s %-20s %-20d %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad, perro.estadoVacio);
+	printf("%-10d %-20s %-20s %-20d %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad, perro.estadoVacio);
 }
 int Perritos_imprimirPerritos(sPerritos lista[], int length)
 {
@@ -147,7 +147,7 @@ int Perritos_imprimirPerritos(sPerritos lista[], int length)
 
 	if(lista!=NULL)
 	{
-		printf("\nLista de perritos:\n\n %-5d %-20s %-20s %-20d %-20d\n", "Id", "nombre", "raza", "edad", "estado");
+		printf("\nLista de perritos:\n\n %-10d %-20s %-20s %-20d %-20d\n", "Id", "nombre", "raza", "edad", "estado");
 
 		for(int i=0;i<length;i++)
 		{
