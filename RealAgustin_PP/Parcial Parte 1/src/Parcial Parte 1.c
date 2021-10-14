@@ -15,7 +15,7 @@
 #include "inputs.h"
 #include "perritos.h"
 #include "estadiaDiaria.h"
-
+#include <ctype.h>
 
 #define maxNombreDuenioPerro 51
 #define maxNumeroTelefono 1199999999
@@ -37,19 +37,18 @@ int main(void)
 	int auxEstadoPosicionVacio;
 	int contadorClientesActivo=0;
 	int contadorId=100000;
-	int afirmacion;
+	char afirmacion;
 	int almacenarAuxIdModificar;
 	int auxBuscarIndice;
 	int contadorPerritos=0;
 	float promedioPerritos;
 	float acumuladorEdadesPerritos=0;
+	int verificarNombre=-1;
 
 	Perritos_iniciarLista(listaPerritos, largoPerritos);
 	Perritos_agregarPerrito(listaPerritos, largoPerritos, 7000, "Lobo","Sharpie",2);
 	Perritos_agregarPerrito(listaPerritos, largoPerritos, 7001, "Sheila","Goldrn",12);
 	Perritos_agregarPerrito(listaPerritos, largoPerritos, 7002, "Reina","Galgo,",13);
-
-
 	EstadiaDiaria_iniciarLista(listaClientesEstadia, largoListaClientes);
 	do
 	{
@@ -82,8 +81,17 @@ int main(void)
 				if(auxEstadoPosicionVacio!=-1)
 				{
 
-					pedirCadena(auxEstadia.nombresDuenio, "Ingrese el nombre del duenio del perro: ", "Error.Ingrese el id del cliente  para la estadia: ", maxNombreDuenioPerro);
-				    pedirEntero(&auxEstadia.telefonoContacto, "Ingrese el numero de telefono del cliente de la estadia(11---------): ", "Error.Ingrese el numero de telefono del cliente de la estadia(11---------): ", minNumeroTelefono, maxNumeroTelefono);
+					while(verificarNombre==-1)
+					{
+							pedirCadena(auxEstadia.nombresDuenio, "Ingrese el nombre del duenio del perro: ", "Error.Ingrese el id del cliente  para la estadia: ", maxNombreDuenioPerro);
+							verificarNombre=SoloLetras(auxEstadia.nombresDuenio);
+							if(verificarNombre!=1)
+							{
+								printf("Reingrese solo debe conter letras...\n");
+							}
+					}
+
+					pedirEntero(&auxEstadia.telefonoContacto, "Ingrese el numero de telefono del cliente de la estadia(11---------): ", "Error.Ingrese el numero de telefono del cliente de la estadia(11---------): ", minNumeroTelefono, maxNumeroTelefono);
 					pedirEntero(&auxEstadia.idPerro, "Ingrese la id del perro del cliente de la estadia(7000-70000): ", "Error. Ingrese la id del perro del cliente de la estadia(1-1000):", minIdPerro, maxIdPerro);
 					Fecha_pedirVerificarFecha(&auxEstadia.fecha);
 					auxEstadia.id=contadorId;
@@ -180,7 +188,7 @@ int main(void)
 					printf("No se puedo mostrar la lista de estadia...\n");
 				}
 				break;
-			/*case 5:
+			case 5:
 				printf("Mostrar los perritos...\n");
 				if(contadorClientesActivo>0)
 				{
@@ -192,18 +200,18 @@ int main(void)
 				}
 				break;
 			case 6:
-				printf("El promedio de los perritos es: \n");
 				if(contadorClientesActivo>0)
 				{
 					Perritos_contarPerritosActivos(listaPerritos, largoPerritos, &contadorPerritos);
 					Perritos_SumaEdadesGeneral(listaPerritos, largoPerritos, &acumuladorEdadesPerritos);
 					Perritos_PromedioEdades(listaPerritos, largoPerritos, &promedioPerritos, &acumuladorEdadesPerritos, &contadorPerritos);
+					printf("El promedio de los perritos es: %.2f\n", promedioPerritos);
 				}
 				else
 				{
 					printf("No se puedo mostrar el promedio de los perritos...\n");
 				}
-				break;*/
+				break;
 			}
 
 		}while(option!=7);

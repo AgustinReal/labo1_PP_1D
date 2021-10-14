@@ -77,7 +77,7 @@ int EstadiaDiaria_eliminarPerroEstadia(sEstadiaDiaria lista[], int len, int id)
 
 			if(!ConfirmarSioNoEstadiaDiaria("\nIngrese 's' para confirmar la eliminacion del perrito de la estadia."))
 			{
-				lista[index].estadoEstadiaVacio=0;
+				lista[index].estadoEstadiaVacio=1;
 				printf("\nEl perrito de la estadia %s fue eliminado correctamente!\n\n", lista[index].nombresDuenio);
 				retorno=0;
 			}
@@ -93,52 +93,35 @@ int EstadiaDiaria_eliminarPerroEstadia(sEstadiaDiaria lista[], int len, int id)
 	}
 	return retorno;
 }
+
 int EstadiaDiaria_orderEstadiaPerrito(sEstadiaDiaria lista[], int len)
 {
-		int order;
+
 		int retorno=-1;
 		sEstadiaDiaria auxLista;
 
 		if(lista!=NULL)
 		{
-
-		   printf("Ingrese la manera que quiere ordenar los nombres, 1 para ascendente: ");
-		   fflush(stdin);
-		   scanf("%d", &order);
-
-		   while(order>2)
-		   {
-			   printf("Ingrese la manera que quiere ordenar los nombres, 1 para ascendente: ");
-			   fflush(stdin);
-			   scanf("%d", &order);
-		   }
-
-		   switch(order)
-		   {
-			 case 1:
-				 for(int i=0;i<len;i++)
+		 for(int i=0;i<len;i++)
 				 {
 				   for(int j=i+1;j<len;j++)
 				   {
-					   if(lista[i].estadoEstadiaVacio==1 && strcmp(lista[i].nombresDuenio, lista[j].nombresDuenio)==-1 &&lista[j].estadoEstadiaVacio==1 && Fecha_AcpyB(lista[i].fecha, lista[j].fecha)==-1)
+					   if(Fecha_AcpyB(lista[i].fecha, lista[j].fecha)==-1)
 					   {
 						  auxLista=lista[i];
 						  lista[i]=lista[j];
 						  lista[j]=auxLista;
 					   }
-					   else if(lista[i].estadoEstadiaVacio==1 && lista[j].estadoEstadiaVacio==1 && Fecha_AcpyB(lista[i].fecha, lista[j].fecha)==0 && strcmp(lista[i].nombresDuenio, lista[j].nombresDuenio)==0)
-					  {
+					   else if((Fecha_AcpyB(lista[i].fecha, lista[j].fecha)==0) && strcmp(lista[i].nombresDuenio, lista[j].nombresDuenio)>0)
+					   {
 						  auxLista=lista[i];
 						  lista[i]=lista[j];
 						  lista[j]=auxLista;
-					  }
+					   }
 				   }
 				 }
-			 order=0;
-			 break;
-			 retorno=1;
-		   }
 
+			 retorno=1;
 		}
 
 		return retorno;
@@ -147,6 +130,7 @@ void EstadiaDiaria_mostrarUnaEstadia(sEstadiaDiaria estadia)
 {
 	printf("%-5d %-20s %-20d %-20d %d-%d-%d \n", estadia.id, estadia.nombresDuenio, estadia.telefonoContacto, estadia.idPerro, estadia.fecha.dia, estadia.fecha.mes, estadia.fecha.anio);
 }
+
 int EstadiaDiaria_imprimirListaEstadiaDiaria(sEstadiaDiaria lista[], int length)
 {
 	int retorno=-1;
@@ -186,7 +170,7 @@ int EstadiaDiaria_buscarPorId(sEstadiaDiaria lista[], int len,int id)
 {
 	int index=-1;
 
-		if(lista!=NULL && id!=NULL)
+		if(lista!=NULL )
 		{
 			for(int i=0;i<len;i++)
 			{

@@ -86,6 +86,7 @@ int Fecha_pedirVerificarFecha(sFecha* fecha)
 
 	return retorno;
 }
+
 int Fecha_AcpyB(sFecha fechaA, sFecha fechaB)
 {
 	int retorno;
@@ -116,6 +117,7 @@ int Fecha_AcpyB(sFecha fechaA, sFecha fechaB)
 	return retorno;
 
 }
+
 int Fecha_modificarFecha(sFecha* fecha)
 {
 	int retorno=-1;
@@ -124,10 +126,11 @@ int Fecha_modificarFecha(sFecha* fecha)
 	{
 
 		Fecha_pedirVerificarFecha(fecha);
-
+		retorno=1;
 	}
 	return retorno;
 }
+
 void Fecha_imprimirFecha(sFecha fecha)
 {
 	printf("%-3d %-3d %-5d", fecha.dia, fecha.mes, fecha.anio);

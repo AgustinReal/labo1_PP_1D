@@ -25,9 +25,10 @@ int Perritos_iniciarLista(sPerritos lista[], int len)
 	}
   return retorno;
 }
+
 int Perritos_agregarPerrito(sPerritos lista[], int len, int id, char nombre[],char raza[],int edad)
 {
-  int valor;
+  int retorno;
   int index;
   index=Perritos_buscarEspacioLibrePerrito(lista, len);
 
@@ -47,15 +48,16 @@ int Perritos_agregarPerrito(sPerritos lista[], int len, int id, char nombre[],ch
 		{
 			printf("\nError ya se cargo la lista no hay espacios disponibles...\n");
 		}
-		valor=0;
+		retorno=0;
 	}
 	else
 	{
 		printf("\nNo se pudo cargar...\n");
-		valor=-1;
+		retorno=-1;
 	}
-	return valor;
+	return retorno;
 }
+
 int Perritos_eliminarPerrito(sPerritos lista[], int len, int id)
 {
 	int retorno=-1;
@@ -64,7 +66,7 @@ int Perritos_eliminarPerrito(sPerritos lista[], int len, int id)
 
 	if(lista!=NULL)
 	{
-		pedirEntero(&idIngresado,"Ingrese el ID del perrito a borrar de (0-1000): ", "Reingrese el ID del perrito a borrar de (0-1000): ", 0, 1000);
+		pedirEntero(&idIngresado,"Ingrese el ID del perrito a borrar de (100000-1000000): ", "Reingrese el ID del perrito a borrar de (100000-1000000): ", 100000, 1000000);
 		index=Perritos_buscarPorIdPerrito(lista, len, idIngresado);
 
 		if(index!=-1)
@@ -74,7 +76,7 @@ int Perritos_eliminarPerrito(sPerritos lista[], int len, int id)
 
 			if(!ConfirmarSioNoPerrito("\nIngrese 's' para confirmar la eliminacion del perrito."))
 			{
-				lista[index].estadoVacio=0;
+				lista[index].estadoVacio=1;
 				printf("\nEl perrito %s fue eliminado correctamente!\n\n", lista[index].nombre);
 				retorno=0;
 			}
@@ -90,10 +92,11 @@ int Perritos_eliminarPerrito(sPerritos lista[], int len, int id)
 	}
 	return retorno;
 }
-int Perritos_contarPerritosActivos(sPerritos lista[], int len, int* contadorperritos)
+
+int Perritos_contarPerritosActivos(sPerritos lista[], int len, int* auxContadorPerritos)
 {
 	int retorno=-1;
-	*contadorperritos=0;
+	*auxContadorPerritos=0;
 
 	if(lista!=NULL)
 	{
@@ -101,7 +104,7 @@ int Perritos_contarPerritosActivos(sPerritos lista[], int len, int* contadorperr
 		{
 			if(lista[i].estadoVacio==0)
 			{
-				*contadorperritos+=1;
+				*auxContadorPerritos+=1;
 				retorno=1;
 			}
 		}
@@ -137,9 +140,10 @@ float Perritos_PromedioEdades(sPerritos lista[],int len , float* promedio, float
 	}
 	return retorno;
 }
+
 void Perritos_mostrarUnPerrito(sPerritos perro)
 {
-	printf("%-10d %-20s %-20s %-20d %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad, perro.estadoVacio);
+	printf("%-10d %-20s %-20s %-20d\n", perro.id, perro.nombre, perro.raza, perro.edad);
 }
 int Perritos_imprimirPerritos(sPerritos lista[], int length)
 {
@@ -147,7 +151,7 @@ int Perritos_imprimirPerritos(sPerritos lista[], int length)
 
 	if(lista!=NULL)
 	{
-		printf("\nLista de perritos:\n\n %-10d %-20s %-20s %-20d %-20d\n", "Id", "nombre", "raza", "edad", "estado");
+		printf("\nLista de perritos:\n\n %-10s %-20s %-20s %-20s\n", "Id", "nombre", "raza", "edad");
 
 		for(int i=0;i<length;i++)
 		{
@@ -163,6 +167,7 @@ int Perritos_imprimirPerritos(sPerritos lista[], int length)
 	return retorno;
 
 }
+
 int Perritos_buscarEspacioLibrePerrito(sPerritos lista[], int len)
 {
 	int i;
@@ -195,11 +200,12 @@ int ConfirmarSioNoPerrito(char* mensaje)
 
 	return retorno;
 }
+
 int Perritos_buscarPorIdPerrito(sPerritos lista[], int len,int id)
 {
 	int index=-1;
 
-	if(lista!=NULL && id!=NULL)
+	if(lista!=NULL)
 	{
 		for(int i=0;i<len;i++)
 		{

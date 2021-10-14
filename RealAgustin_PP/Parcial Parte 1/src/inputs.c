@@ -31,6 +31,22 @@ int pedirEntero(int* entero, char* mensaje, char* mensajeError, int min, int max
 	return retorno;
 }
 
+int SoloLetras(char* palabra)
+{
+    int retorno=1;
+    int i=0;
+    while(palabra[i]!='\0')
+
+    {
+        if((palabra[i]!=' ')&&(palabra[i] < 'a'||  palabra[i] > 'z') && (palabra[i] < 'A' || palabra[i] > 'Z'))
+        {
+            retorno=-1;
+        }
+        i++;
+    }
+    return retorno;
+}
+
 int pedirFlotante(float* flotante, char* mensaje, char* mensajeError, float min, float max)
 {
 	int retorno = -1;
