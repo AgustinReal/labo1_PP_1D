@@ -9,6 +9,7 @@
 #include <string.h>
 #include "fecha.h"
 #include "inputs.h"
+#include <ctype.h>
 
 int Fecha_pedirVerificarFecha(sFecha* fecha)
 {

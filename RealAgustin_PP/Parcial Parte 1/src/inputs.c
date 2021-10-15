@@ -35,16 +35,20 @@ int SoloLetras(char* palabra)
 {
     int retorno=1;
     int i=0;
-    while(palabra[i]!='\0')
 
+    if(palabra!=NULL)
     {
-        if((palabra[i]!=' ')&&(palabra[i] < 'a'||  palabra[i] > 'z') && (palabra[i] < 'A' || palabra[i] > 'Z'))
-        {
-            retorno=-1;
-        }
-        i++;
+		while(palabra[i]!='\0')
+
+		{
+			if((palabra[i]!=' ')&&(palabra[i] < 'a'||  palabra[i] > 'z') && (palabra[i] < 'A' || palabra[i] > 'Z'))
+			{
+				retorno=-1;
+			}
+			i++;
+		}
     }
-    return retorno;
+			return retorno;
 }
 
 int pedirFlotante(float* flotante, char* mensaje, char* mensajeError, float min, float max)
@@ -85,7 +89,7 @@ int pedirCadena(char* cadena, char* mensaje, char* mensajeError, int max)
 		scanf("%[^\n]", buffer);
 		tam = strlen(buffer);
 
-		while(tam > max)
+		while(tam > max || SoloLetras(buffer)==-1)
 		{
 			printf("%s", mensajeError);
 			fflush(stdin);
@@ -93,13 +97,37 @@ int pedirCadena(char* cadena, char* mensaje, char* mensajeError, int max)
 			tam = strlen(buffer);
 		}
 
+
 		strcpy(cadena, buffer);
+		acomodarCadenaIngresada(cadena);
 		retorno = 0;
 	}
 
 	return retorno;
 }
+int acomodarCadenaIngresada(char cadena[])
+{
+    int retorno=-1;
+    int i=0;
 
+    if(cadena!=NULL)
+    {
+        strlwr(cadena);
+        cadena[0]=toupper(cadena[0]);
+
+        while(cadena[i]!='\0')
+        {
+            if(cadena[i]==' ')
+            {
+                cadena[i+1]=toupper(cadena[i+1]);
+            }
+            i++;
+        }
+        retorno=1;
+    }
+
+    return retorno;
+}
 int pedirCaracter(char* caracter, char* mensaje)
 {
 	int retorno = -1;

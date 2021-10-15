@@ -69,5 +69,14 @@ int pedirCaracter(char* caracter, char* mensaje);
  * @return retorna 0 o -1: "0" si pudo realizar la funcion o "-1" si no pudo realizar la funccion.
  */
 int SoloLetras(char* palabra);
-
+/**
+ * @fn int acomodarCadenaIngresada(char[])
+ * @brief Esta funcion: Permite que el usuario cuando ingresa un nombre con mayusculas y minusculas
+ * de forma intercalada, la funcion lo arregla
+ *
+ * @param cadena:Es el array de chars que ingresa el usuario.
+ *
+ * @return retorna 1 o -1: "1" si pudo realizar la funcion o "-1" si no pudo realizar la funccion.
+ */
+int acomodarCadenaIngresada(char cadena[]);
 #endif /* INPUTS_H_ */
