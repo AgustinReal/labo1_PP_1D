@@ -92,7 +92,34 @@ int Perritos_eliminarPerrito(sPerritos lista[], int len, int id)
 	}
 	return retorno;
 }
+/*
+int Perritos_masTieneEstadiasReservadas(sPerritos lista[],int len)
+{
+	int retorno=-1;
+	int flagMasEstadias=0;
+	int masEstadias;
+	char nombrePerroMasCaro;
 
+	if(lista!=NULL)
+	{
+		for(int i=0;i<len;i++)
+		{
+			if(lista[i].estadoVacio==0)
+			{
+				if(flagMasEstadias==0 || )
+				{
+
+
+				}
+
+			}
+
+		}
+
+	}
+
+
+}*/
 int Perritos_contarPerritosActivos(sPerritos lista[], int len, int* auxContadorPerritos)
 {
 	int retorno=-1;

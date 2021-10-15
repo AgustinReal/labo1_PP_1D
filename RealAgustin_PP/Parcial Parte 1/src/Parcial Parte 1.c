@@ -15,6 +15,7 @@
 #include "inputs.h"
 #include "perritos.h"
 #include "estadiaDiaria.h"
+#include "duenio.h"
 #include <ctype.h>
 
 #define maxNombreDuenioPerro 51
@@ -25,6 +26,7 @@
 #define minIdcontador 100000
 #define maxIdcontador 1000000
 #define largoPerritos 1000
+#define largoDuenio 1000
 #define largoListaClientes 1000
 int main(void)
 {
@@ -33,6 +35,7 @@ int main(void)
 	sEstadiaDiaria auxEstadia;
 	sEstadiaDiaria listaClientesEstadia[largoListaClientes];
 	sPerritos listaPerritos[largoPerritos];
+	sDuenio listaDuenio[largoDuenio];
 	int option;
 	int auxEstadoPosicionVacio;
 	int contadorClientesActivo=0;
@@ -50,6 +53,14 @@ int main(void)
 	Perritos_agregarPerrito(listaPerritos, largoPerritos, 7001, "Sheila","Goldrn",12);
 	Perritos_agregarPerrito(listaPerritos, largoPerritos, 7002, "Reina","Galgo,",13);
 	EstadiaDiaria_iniciarLista(listaClientesEstadia, largoListaClientes);
+
+	duenio_iniciarLista(listaDuenio, largoDuenio);
+	duenio_agregarDuenio(listaDuenio, largoDuenio, 30000, "Juan", 1143456734);
+	duenio_agregarDuenio(listaDuenio, largoDuenio, 30001, "Pablo", 1163549872);
+	duenio_agregarDuenio(listaDuenio, largoDuenio, 30002, "Raul", 1123890354);
+	duenio_agregarDuenio(listaDuenio, largoDuenio, 30003, "Tomas",1178399034);
+	duenio_agregarDuenio(listaDuenio, largoDuenio, 30004, "Jose",1173892032);
+
 	do
 	{
 			pedirEntero(&option, "-------------------------------------------------------------------------------\n"
@@ -59,7 +70,9 @@ int main(void)
 								 "4.LISTAR ESTADÍAS:\n"
 								 "5.LISTAR PERROS:\n"
 								 "6.Promedio de edad de los perros.\n"
-								 "7.SALIR\n"
+								 "7. El perro que tiene más estadías reservadas.\n"
+								 "8. Listado de perros con sus estadías diarias reservadas.\n"
+								 "9.SALIR\n"
 								 "--------------------------------------------------------------------------------\n"
 								 "Ingrese una opcion: ",
 
@@ -69,9 +82,11 @@ int main(void)
 								 "4.LISTAR ESTADÍAS:\n"
 								 "5.LISTAR PERROS:\n"
 								 "6.Promedio de edad de los perros.\n"
-								 "7.SALIR\n"
+								 "7. El perro que tiene más estadías reservadas.\n"
+								 "8. Listado de perros con sus estadías diarias reservadas.\n"
+								 "9.SALIR\n"
 								 "---------------------------------------------------------------------------------\n"
-								 "Opcion invalida, reingrese: ",1, 7);
+								 "Opcion invalida, reingrese: ",1, 9);
 
 
 			switch(option)
@@ -203,9 +218,18 @@ int main(void)
 					printf("No se puedo mostrar el promedio de los perritos...\n");
 				}
 				break;
+			case 7:
+				EstadiaDiaria_orderEstadiaPerrito(listaClientesEstadia, largoListaClientes);
+
+				EstadiaDiaria_imprimirListaEstadiaDiaria(listaClientesEstadia, largoListaClientes);
+				break;
+			case 8:
+				duenio_imprimirListaEstadiaDiaria(listaDuenio, largoPerritos);
+				break;
+
 			}
 
-		}while(option!=7);
+		}while(option!=9);
 
 
 	return EXIT_SUCCESS;

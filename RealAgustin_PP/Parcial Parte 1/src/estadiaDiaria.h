@@ -9,16 +9,19 @@
 #include <string.h>
 #include <ctype.h>
 
+
 #ifndef ESTADIADIARIA_H_
 #define ESTADIADIARIA_H_
 
+#include "duenio.h"
 #include "inputs.h"
 #include "perritos.h"
 #include "fecha.h"
+
 typedef struct
 {
 	int id;
-	char nombresDuenio[51];
+	int nombresDuenio[51];
 	int telefonoContacto;
 	int idPerro;
 	sFecha fecha;
@@ -70,7 +73,7 @@ int EstadiaDiaria_buscarEspacioLibre(sEstadiaDiaria lista[], int len);
  *
  * @return retorna 0 o -1: "0" si pudo realizar la funcion o "-1" si no pudo realizar la funccion.
  */
-int EstadiaDiaria_buscarPorId(sEstadiaDiaria lista[], int len,int id);
+int EstadiaDiaria_buscarPorId(sEstadiaDiaria lista[], int len, int id);
 /**
  * @fn int EstadiaDiaria_eliminarPerroEstadia(sEstadiaDiaria[], int, int)
  * @brief Esta funcion elimina una estadia  perrito ya ingresado, pregunta la id a eliminar y lo elimina,

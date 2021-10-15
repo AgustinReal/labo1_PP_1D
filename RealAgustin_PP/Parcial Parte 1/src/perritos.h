@@ -148,4 +148,7 @@ float Perritos_PromedioEdades(sPerritos lista[],int len , float* promedio, float
  * @return retorna 1 o -1: "1" si pudo realizar la funcion o "-1" si no pudo realizar la funccion.
  */
 int Perritos_imprimirPerritos(sPerritos lista[], int length);
+
+
+int Perritos_masTieneEstadiasReservadas(sPerritos lista[],int len);
 #endif /* PERRITOS_H_ */
